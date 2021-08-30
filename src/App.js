@@ -30,21 +30,31 @@ function App() {
 
   //Add Task
 
-  const addTask = (task) => {
-    console.log(task);
+  const addTask = async (task) => {
+    // console.log(task);
+    // const id = Math.floor(Math.random() * 10000) + 1;
+    // console.log(id);
+    // const newTask = { id, ...task };
+    // setTasks([...tasks, newTask]);
 
-    const id = Math.floor(Math.random() * 10000) + 1;
+    const res = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
+    });
 
-    console.log(id);
+    const data = await res.json();
 
-    const newTask = { id, ...task };
-
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, data]);
   };
 
   // delete task
 
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
+
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
@@ -67,6 +77,12 @@ function App() {
         showAdd={showAddTask}
       />
       {showAddTask && <AddTask onAdd={addTask} />}
+
+      {tasks.length > 0 ? (
+        <Tasks onToggle={toggleReminder} tasks={tasks} onDelete={deleteTask} />
+      ) : (
+        "No tasks to display"
+      )}
     </div>
   );
 }
