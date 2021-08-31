@@ -110,3 +110,16 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+.about {
+  margin-top: 50px;
+  align-items: center;
+  position: absolute;
+
+}
+
+.about a,
+footer a {
+  text-decoration: none;
+  color: #000000
+}

@@ -23,7 +23,7 @@ const AddTask = ({ onAdd }) => {
         <label htmlFor="">Task</label>
         <input
           type="text"
-          placeholder="enter task nameTask Name"
+          placeholder="enter task name"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
